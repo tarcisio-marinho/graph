@@ -8,6 +8,9 @@
 *.obj
 *.elf
 
+# Executables
+main
+
 # vscode stuff
 .vscode
 
