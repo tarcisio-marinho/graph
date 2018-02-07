@@ -2,20 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lib/LinkedList.h"
+#include "lib/Queue.h"
 int main(int argc, char *argv[]){
     
-    LinkedList * lista = NULL;
+    Queue * fila = NULL;
+    int valor;
 
-    append(&lista, 10);
-    append(&lista, 20);
-    append(&lista, 30);
-    append(&lista, 40);
-    append(&lista, 50);
-    append(&lista, 60);
+    create_queue(fila);
 
-    print(lista);
-    
-    delete(&lista, 10);
-    print(lista);
+    enqueue(fila, 10);
+    valor = dequeue(fila);
+
+    printf("%d\n", valor);
     return 0;
 }

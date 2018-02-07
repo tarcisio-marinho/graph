@@ -2,6 +2,9 @@
 #ifndef _QUEUE_
 #define _QUEUE_
 
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct noqueue {
        int info;
        struct noqueue *prox;
