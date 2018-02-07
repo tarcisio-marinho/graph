@@ -17,7 +17,7 @@ void append(LinkedList **l,int vertice){
     aux->prox = novo;
 } 
 
-void exibir_todos(LinkedList *l){
+void print(LinkedList *l){
     LinkedList *novo;
     if(l == NULL){
         printf("Vazia\n");
