@@ -3,6 +3,7 @@
 #define _LINKEDLIST_
 
 #include<stdio.h>
+#include<stdlib.h>
 
 typedef struct no{
     int vertice;
@@ -10,5 +11,6 @@ typedef struct no{
 }LinkedList;
 
 void end_insertion(LinkedList **l, int vertice);
+void print(LinkedList *l);
 
 #endif
