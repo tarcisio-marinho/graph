@@ -1,31 +1,15 @@
 #include "Queue.h"
 
-typedef struct pedido {
-     int numero;
-     char descricao [100];
-} Pedido;
 
-typedef struct noQueue {
-       Pedido info;
-       struct noQueue *prox;
-} NoQueue;
-
-typedef struct descritor {
-      NoQueue * inicio, * fim;
-}Descritor;
-
-typedef Descritor * Queue;
-
-void createQueue (Queue * fila) {
+void create_queue(Queue * fila) {
     *fila = (Descritor *) malloc (sizeof(Descritor));
     (*fila)->inicio = NULL;
     (*fila)->fim = NULL;
 }
 
-
-void enQueue (Queue * fila, Pedido valor) {
-    NoQueue * novo;
-    novo = (NoQueue *) malloc (sizeof(NoQueue));
+void enqueue(Queue * fila, int valor) {
+    noQueue * novo;
+    novo = (noQueue *) malloc (sizeof(noQueue));
     novo->info = valor;
     novo->prox = NULL;
     if ((*fila)->inicio == NULL) {
@@ -38,9 +22,9 @@ void enQueue (Queue * fila, Pedido valor) {
     }
 }
 
-Pedido deQueue (Queue * fila) {
-    NoQueue * aux;
-    Pedido valor;
+int dequeue(Queue * fila) {
+    noQueue * aux;
+    int valor;
     aux = (*fila)->inicio;
     (*fila)->inicio = aux->prox;
     valor = aux->info;
@@ -51,25 +35,25 @@ Pedido deQueue (Queue * fila) {
     return valor;
 }
 
-Pedido head (Queue fila) {
+int head(Queue fila) {
     return fila->inicio->info;
 }
 
-int isEmpty (Queue fila) {
+int is_empty(Queue fila) {
     if (fila->inicio == NULL) {
-        return true;
+        return 1;
     }
     else {
-        return false;
+        return 0;
     }
 }
 
-int isFull (Queue fila) {
-    return false;
+int is_full(Queue fila) {
+    return 0;
 }
 
-void destroyQueue (Queue * fila) {
-    NoQueue * aux;
+void destroy_queue(Queue * fila) {
+    noQueue * aux;
     while ((*fila)->inicio != NULL) {
         aux= (*fila)->inicio;
         (*fila)->inicio = aux->prox;
