@@ -10,7 +10,7 @@ typedef struct no{
     struct no *prox;
 }LinkedList;
 
-void end_insertion(LinkedList **l, int vertice);
+void append(LinkedList **l, int vertice);
 void print(LinkedList *l);
 
 #endif
