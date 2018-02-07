@@ -52,13 +52,12 @@ void destroy(LinkedList **l){
 void print(LinkedList *l){
     LinkedList *novo;
     if(l == NULL){
-        printf("Vazia\n");
+        printf("[]\n");
     }else{
         novo = l;
         while(novo->prox != NULL){
             printf("%d\n", novo->vertice);
             novo = novo->prox; 
-        } 
-        printf("\n\n");
+        }
     } 
 }
