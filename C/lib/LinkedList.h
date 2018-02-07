@@ -11,6 +11,8 @@ typedef struct no{
 }LinkedList;
 
 void append(LinkedList **l, int vertice);
+void delete(LinkedList **l, int vertice);
+void destroy(LinkedList **l);
 void print(LinkedList *l);
 
 #endif
