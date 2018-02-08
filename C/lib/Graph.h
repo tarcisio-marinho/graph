@@ -7,9 +7,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct graph{
-    LinkedList *start;
-    int size;
+
+// A structure to represent a graph. A graph is an array of adjacency lists.
+// Size of array will be V (number of vertices in graph)
+typedef struct Graph{
+    int V;
+    LinkedList* array;
 }Graph;
 
 void create_graph(Graph **grafo);
