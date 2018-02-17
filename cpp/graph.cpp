@@ -1,7 +1,4 @@
-#include<vector>
-#include<iostream>
-
-using namespace std;
+#include "graph.h"
 
 vector<vector<int> > matrix_to_adj(int mat[3][3]){
     vector<vector<int> > adj;
@@ -22,21 +19,3 @@ vector<vector<int> > matrix_to_adj(int mat[3][3]){
 
 
 
-int main(){
-    vector<vector<int> > matrix;
-    int mat[3][3] = {{1, 0, 0}, {1, 0, 1}, {0, 1, 0}};
-
-    
-    matrix = matrix_to_adj(mat);
-
-    for(int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            cout << "i: " << i << " - j: " << j  << " valor: "<< matrix[i][j] << endl;
-        }
-        cout << endl;
-    }
-
-
-    
-    return 0;
-}
