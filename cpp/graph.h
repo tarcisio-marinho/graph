@@ -5,14 +5,14 @@
 #include<iostream>
 #include<vector>
 
-#define n 3
+#define n 4
 
 using namespace std;
 
 class Graph{
 
 public:
-    vector<vector <int> > graph;
+    vector<vector <int> > matrix;
     bool visited;
 
     Graph * create_graph();
@@ -21,6 +21,7 @@ public:
     void dijskras(int start, int end);
     void a_star(int start, int end);
     Graph * matrix_to_graph(int mat[][n]);
+    void print();
 
 };
 
