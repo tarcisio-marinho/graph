@@ -11,8 +11,6 @@ vector<vector<int> > matrix_to_graph(int mat[n][n]){
         for(int j = 0; j < n; j++){
             if(mat[i][j] != 0){
                 novo.push_back(mat[i][j]);
-            }else{
-                novo.push_back(-1);
             }
         }
         adj.push_back(novo);
@@ -32,8 +30,8 @@ int main(){
     for(int i = 0; i < n; i++){
         cout << i << "-> ";
         for (int j = 0; j < matrix[i].size(); j++){
-            if(matrix[i][j] != -1)
-                cout << j << " " ;
+            //if(matrix[i][j] != -1)
+            cout << j << " " ;
         }
         cout << endl;
     }
