@@ -11,7 +11,6 @@ struct AdjListNode{
 struct AdjList{
     struct AdjListNode *head;  // pointer to head node of list
 };
-BR
 
  
 // A structure to represent a graph. A graph is an array of adjacency lists.
@@ -66,7 +65,7 @@ void printGraph(struct Graph* graph){
     for (v = 0; v < graph->V; ++v)
     {
         struct AdjListNode* pCrawl = graph->array[v].head;
-        printf("\n Adjacency list of vertex %d\n head ", v);
+        printf("\n%d", v);
         while (pCrawl)
         {
             printf("-> %d", pCrawl->dest);
