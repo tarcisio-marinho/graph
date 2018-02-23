@@ -1,24 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//#include "Graph.h"
-typedef struct AdjListNode{
-    int dest;
-    struct AdjListNode* next;
-}AdjListNode;
- 
-// A structure to represent an adjacency list
-typedef struct AdjList{
-    AdjListNode *head;  // pointer to head node of list
-}AdjList;
+#include "Graph.h"
 
- 
-// A structure to represent a graph. A graph is an array of adjacency lists.
-// Size of array will be V (number of vertices in graph)
-typedef struct Graph{
-    int V;
-    AdjList* array;
-}Graph;
  
 // A utility function to create a new adjacency list node
 AdjListNode* newAdjListNode(int dest){
@@ -71,23 +55,4 @@ void printGraph(Graph* graph){
         }
         printf("\n");
     }
-}
-
-
-int main(){
-    // create the graph given in above fugure
-    int V = 5;
-    Graph* graph = createGraph(V);
-    addEdge(graph, 0, 1);
-    addEdge(graph, 0, 4);
-    addEdge(graph, 1, 2);
-    addEdge(graph, 1, 3);
-    addEdge(graph, 1, 4);
-    addEdge(graph, 2, 3);
-    addEdge(graph, 3, 4);
- 
-    // print the adjacency list representation of the above graph
-    printGraph(graph);
- 
-    return 0;
 }

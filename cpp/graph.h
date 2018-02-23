@@ -20,7 +20,7 @@ public:
     void bfs();
     void dijskras(int start, int end);
     void a_star(int start, int end);
-    Graph * matrix_to_graph(int mat[][n]);
+    static Graph matrix_to_graph(int mat[][n]);
     void print();
 
 };

@@ -2,32 +2,32 @@
 
 
 
-Graph::Graph * create_graph(){
+Graph * Graph::create_graph(){
     
 }
 
 
-Graph::void dfs(){
+void Graph::dfs(){
     
 }
 
 
-Graph::void bfs(){
+void Graph::bfs(){
     
 }
 
 
-Graph::void dijskras(int start, int end){
+void Graph::dijskras(int start, int end){
     
 }
 
 
-Graph::void a_star(int start, int end){
+void Graph::a_star(int start, int end){
     
 }
 
 
-Graph::static Graph matrix_to_graph(int mat[][n]){
+Graph Graph::matrix_to_graph(int mat[][n]){
     Graph adj;
     for(int i = 0; i < n; i++){
         vector<int> novo;
@@ -45,7 +45,7 @@ Graph::static Graph matrix_to_graph(int mat[][n]){
 }
 
 
-Graph::void print(){
+void Graph::print(){
     for(int i = 0; i < n; i++){
         cout << i << "-> ";
         for (int j = 0; j < matrix[i].size(); j++){
