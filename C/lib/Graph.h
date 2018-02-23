@@ -12,14 +12,12 @@ typedef struct AdjListNode{
     struct AdjListNode* next;
 }AdjListNode;
  
-// A structure to represent an adjacency list
+
 typedef struct AdjList{
-    AdjListNode *head;  // pointer to head node of list
+    AdjListNode *head;
 }AdjList;
 
  
-// A structure to represent a graph. A graph is an array of adjacency lists.
-// Size of array will be V (number of vertices in graph)
 typedef struct Graph{
     int V;
     AdjList* array;
