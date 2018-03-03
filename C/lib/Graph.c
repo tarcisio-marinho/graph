@@ -3,7 +3,52 @@
 
 #include "Graph.h"
 
- 
+
+void mat_from_file(const char * path){
+    FILE * f = fopen(path, "r");
+    if(f == NULL){
+        printf("Arquivo inexistente\n");
+        exit(-1);
+    }
+    
+    int size;
+    fscanf(f, "%d", &size);
+    int mat[size][size];
+
+    for (int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++){
+            fscanf(f, "%d", &mat[i][j]);
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
+Graph * from_file(const char * path){
+    FILE * f = fopen(path, "r");
+    if(f == NULL){
+        printf("Arquivo inexistente\n");
+        exit(-1);
+    }
+    
+    int size;
+    fscanf(f, "%d", &size);
+    Graph * g = create_graph(size);
+
+    for (int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++){
+            int valor;
+            fscanf(f, "%d", &valor);
+            if(valor == 1){
+                add_edge(g, i, j);
+            }
+        }
+    }
+    return g;   
+}
+
+
 AdjListNode* newAdjListNode(int dest){
     AdjListNode* newNode =
             (AdjListNode*) malloc(sizeof(AdjListNode));
@@ -12,7 +57,8 @@ AdjListNode* newAdjListNode(int dest){
     return newNode;
 }
  
-Graph* createGraph(int V){
+
+Graph* create_graph(int V){
     Graph* graph = (Graph*) malloc(sizeof(Graph));
     graph->V = V;
  
@@ -25,7 +71,8 @@ Graph* createGraph(int V){
     return graph;
 }
  
-void addEdge(Graph* graph, int src, int dest){
+
+void add_edge(Graph* graph, int src, int dest){
     AdjListNode* newNode = newAdjListNode(dest);
     newNode->next = graph->array[src].head;
     graph->array[src].head = newNode;
@@ -35,7 +82,8 @@ void addEdge(Graph* graph, int src, int dest){
     graph->array[dest].head = newNode;
 }
  
-void printGraph(Graph* graph){
+
+void print_graph(Graph* graph){
     int v;
     for (v = 0; v < graph->V; ++v){
         struct AdjListNode* pCrawl = graph->array[v].head;

@@ -23,11 +23,10 @@ typedef struct Graph{
     AdjList* array;
 }Graph;
 
-
-Graph* createGraph(int V);
-Graph* createGraph(int V);
-void addEdge(Graph* graph, int src, int dest);
-void printGraph(Graph* graph);
-
+Graph * from_file(const char * path);
+Graph* create_graph(int V);
+void add_edge(Graph* graph, int src, int dest);
+void print_graph(Graph* graph);
+void mat_from_file(const char * path);
 
 #endif

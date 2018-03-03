@@ -8,16 +8,19 @@
 int main(int argc, char *argv[]){
     
     int V = 5;
-    Graph* graph = createGraph(V);
-    addEdge(graph, 0, 1);
-    addEdge(graph, 0, 4);
-    addEdge(graph, 1, 2);
-    addEdge(graph, 1, 3);
-    addEdge(graph, 1, 4);
-    addEdge(graph, 2, 3);
-    addEdge(graph, 3, 4);
- 
-    printGraph(graph);
+    // Graph *g = from_file("grafo.g");
+    
+    // Graph* graph = create_graph(V);
+    // add_edge(graph, 0, 1);
+    // add_edge(graph, 0, 4);
+    // add_edge(graph, 1, 2);
+    // add_edge(graph, 1, 3);
+    // add_edge(graph, 1, 4);
+    // add_edge(graph, 2, 3);
+    // add_edge(graph, 3, 4);
+    
+    // print_graph(graph);
+    mat_from_file("grafo.g");
  
     return 0;
 }
