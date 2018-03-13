@@ -35,27 +35,31 @@ void Graph::print(){
     }
 }
 
-void Graph::mat_from_file(const char * path){
+Graph Graph::mat_from_file(const char * path){
     FILE * f = fopen(path, "r");
     if(f == NULL){
-        printf("Arquivo inexistente\n");
+        std::cout << "Arquivo não existe" << std::endl;
         exit(-1);
     }
-    
+    Graph adj;
     int size;
     fscanf(f, "%d", &size);
     int mat[size][size];
 
     for (int i = 0; i < size; i++){
+        std::vector<int> novo;
+
         for(int j = 0; j < size; j++){
             int valor;
             fscanf(f, "%d", &valor);
             if(valor == 1){
-                grafo[i].push_back();
+                novo.push_back(valor);
             }
         }
-        printf("\n");
+        adj.grafo.push_back(novo);
     }
+    
+    return adj;
 }
 
 
