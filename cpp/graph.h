@@ -7,12 +7,11 @@
 
 #define n 4
 
-using namespace std;
 
 class Graph{
 
 public:
-    vector<vector <int> > matrix;
+    std::vector<std::vector <int> > matrix;
     bool visited;
 
     Graph * create_graph();
