@@ -12,7 +12,7 @@
 class Graph{
 
 public:
-    std::vector<std::vector <int> > matrix;
+    std::vector<std::vector <int> > grafo;
     bool visited;
 
     Graph * create_graph();

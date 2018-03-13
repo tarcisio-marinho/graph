@@ -17,7 +17,7 @@ Graph Graph::matrix_to_graph(int mat[][n]){
                 novo.push_back(-1);
             }
         }
-        adj.matrix.push_back(novo);
+        adj.grafo.push_back(novo);
     }
 
     return adj;
@@ -27,9 +27,9 @@ Graph Graph::matrix_to_graph(int mat[][n]){
 void Graph::print(){
     for(int i = 0; i < n; i++){
         std::cout << i << "-> ";
-        for (int j = 0; j < matrix[i].size(); j++){
-            if(matrix[i][j] != -1)
-                std::cout << j << " " ;
+        for (int j = 0; j < grafo[i].size(); j++){
+            //if(grafo[i][j] != -1)
+            std::cout << j << " " ;
         }
         std::cout << std::endl;
     }
@@ -48,8 +48,11 @@ void Graph::mat_from_file(const char * path){
 
     for (int i = 0; i < size; i++){
         for(int j = 0; j < size; j++){
-            fscanf(f, "%d", &mat[i][j]);
-            printf("%d ", mat[i][j]);
+            int valor;
+            fscanf(f, "%d", &valor);
+            if(valor == 1){
+                grafo[i].push_back();
+            }
         }
         printf("\n");
     }
