@@ -4,6 +4,7 @@
 
 #include<iostream>
 #include<vector>
+#include <queue>
 
 #define n 4
 
@@ -21,6 +22,7 @@ public:
     void a_star(int start, int end);
     static Graph matrix_to_graph(int mat[][n]);
     void print();
+    static void mat_from_file(const char * path);
 
 };
 

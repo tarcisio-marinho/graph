@@ -6,12 +6,14 @@
 using namespace std;
 
 int main(){
-    int mat[n][n] = {{0, 1, 0, 0}, {1, 0, 1, 1}, {0, 1, 0, 0}, {0, 1, 0, 0}};
-
     
-    Graph matrix = Graph::matrix_to_graph(mat);
+    //int mat[n][n] = {{0, 1, 0, 0}, {1, 0, 1, 1}, {0, 1, 0, 0}, {0, 1, 0, 0}};
 
-    matrix.print();
+    Graph::mat_from_file("grafo.g");
+    //Graph matrix = Graph::matrix_to_graph(mat);
+
+
+    ///matrix.print();
 
 
     

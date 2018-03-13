@@ -35,7 +35,7 @@ void Graph::print(){
     }
 }
 
-void mat_from_file(const char * path){
+void Graph::mat_from_file(const char * path){
     FILE * f = fopen(path, "r");
     if(f == NULL){
         printf("Arquivo inexistente\n");
