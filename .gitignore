@@ -2,6 +2,7 @@
 # Prerequisites
 *.d
 
+Huffman-Algorithm
 # Object files
 *.o
 *.ko
