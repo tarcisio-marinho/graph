@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define n 4
 
@@ -12,8 +14,7 @@
 class Graph{
 
 public:
-    std::vector<std::vector <int> > grafo;
-    bool visited;
+
 
     Graph * create_graph();
     void dfs();
@@ -22,8 +23,11 @@ public:
     void a_star(int start, int end);
     static Graph matrix_to_graph(int mat[][n]);
     void print();
-    static Graph mat_from_file(const char * path);
-
+    static Graph graph_from_file(const char * path);
+    
+private:
+    std::vector<std::vector <int> > grafo;
+    bool visited;
 };
 
 

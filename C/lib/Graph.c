@@ -25,7 +25,7 @@ void mat_from_file(const char * path){
 }
 
 
-Graph * from_file(const char * path){
+Graph * graph_from_file(const char * path){
     FILE * f = fopen(path, "r");
     if(f == NULL){
         printf("Arquivo inexistente\n");
@@ -49,49 +49,79 @@ Graph * from_file(const char * path){
 }
 
 
-AdjListNode* newAdjListNode(int dest){
-    AdjListNode* newNode =
-            (AdjListNode*) malloc(sizeof(AdjListNode));
-    newNode->dest = dest;
-    newNode->next = NULL;
-    return newNode;
-}
- 
+Graph* create_graph(int quantityNodes){
+  Graph *temp = (Graph*) malloc(sizeof(Graph));
+  temp->size = quantityNodes;
+  temp->vertices = (Adj**) malloc(quantityNodes * sizeof(Adj*));
+  temp->visited = (bool*) malloc(quantityNodes * sizeof(bool));
+  int i;
+  for (i = 0; i < quantityNodes; i ++){
+      temp->vertices[i] = NULL;
+      temp->visited[i] = false;
+  }
+  return(temp);
 
-Graph* create_graph(int V){
-    Graph* graph = (Graph*) malloc(sizeof(Graph));
-    graph->V = V;
- 
-    graph->array = (AdjList*) malloc(V * sizeof(AdjList));
- 
+}
+
+
+Adj* new_adj_list(int vertex){
+    Adj *temp = (Adj*) malloc(1 * sizeof(Adj));
+    temp->item = vertex;
+    temp->next = NULL;
+    return(temp);
+}
+
+
+void add_edge(Graph *graph, int startVertex, int endVertex){
+  Adj *vertex = new_adj_list(endVertex);
+  vertex->next = graph->vertices[startVertex];
+  graph->vertices[startVertex] = vertex;
+
+  //Undirected graph has an Edge to the other direction as well.
+  /*vertex = new_adj_list(startVertex);
+  vertex->next = graph->vertices[endVertex];
+  graph->vertices[endVertex] = vertex;*/
+}
+
+void print_graph(Graph *graph){
+    if (graph == NULL) return;
+
+    printf("Graph (%d nodes):\n", graph->size);
     int i;
-    for (i = 0; i < V; ++i)
-        graph->array[i].head = NULL;
- 
-    return graph;
-}
- 
-
-void add_edge(Graph* graph, int src, int dest){
-    AdjListNode* newNode = newAdjListNode(dest);
-    newNode->next = graph->array[src].head;
-    graph->array[src].head = newNode;
- 
-    newNode = newAdjListNode(src);
-    newNode->next = graph->array[dest].head;
-    graph->array[dest].head = newNode;
-}
- 
-
-void print_graph(Graph* graph){
-    int v;
-    for (v = 0; v < graph->V; ++v){
-        struct AdjListNode* pCrawl = graph->array[v].head;
-        printf("\n%d", v);
-        while (pCrawl){
-            printf("-> %d", pCrawl->dest);
-            pCrawl = pCrawl->next;
-        }
-        printf("\n");
+    for (i = 0; i < graph->size; i ++){
+        printf("%d ~>", i);
+        Adj *curr = graph->vertices[i];
+        while (curr != NULL){
+            printf(" %d", curr->item);
+            curr = curr->next;
+        } 
+          printf("\n");
     }
+}
+
+void clean_visits(Graph *graph){
+  int i;
+  for (i = 0; i < graph->size; i ++)
+    graph->visited[i] = false;
+}
+
+
+
+void destroy_graph(Graph *graph){
+  int i;
+  for (i = 0; i < graph->size; i ++)
+  {
+    Adj *curr = graph->vertices[i];
+    while (curr != NULL)
+    {
+      graph->vertices[i] = graph->vertices[i]->next;
+      free(curr);
+      curr = graph->vertices[i];
+    }
+    free(curr);
+    free(graph->vertices[i]);
+  }
+  free(graph->vertices);
+  free(graph->visited);
+  free(graph);
 }

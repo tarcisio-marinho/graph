@@ -4,29 +4,33 @@
 
 #include "Queue.h"
 #include<stdio.h>
+#include<stdbool.h>
 #include<stdlib.h>
 
+typedef struct graph{
+  
+    int size;
+    struct AdjList **vertices;
+    bool *visited;
 
-typedef struct AdjListNode{
-    int dest;
-    struct AdjListNode* next;
-}AdjListNode;
- 
-
-typedef struct AdjList{
-    AdjListNode *head;
-}AdjList;
-
- 
-typedef struct Graph{
-    int V;
-    AdjList* array;
 }Graph;
 
-Graph * from_file(const char * path);
-Graph* create_graph(int V);
-void add_edge(Graph* graph, int src, int dest);
-void print_graph(Graph* graph);
+typedef struct AdjList{
+    int item;
+    struct AdjList *next;
+}Adj;
+
+
+
+Graph* create_graph(int quantityNodes);
+Adj* new_adj_list(int vertex);
+void add_edge(Graph *graph, int startVertex, int endVertex);
+void print_graph(Graph *graph);
+void destroy_graph(Graph *graph);
+
+Graph * graph_from_file(const char * path);
+Graph * create_graph(int V);
 void mat_from_file(const char * path);
+
 
 #endif
