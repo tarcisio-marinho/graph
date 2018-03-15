@@ -11,6 +11,6 @@ int main(int argc, char *argv[]){
     
     Graph *g = graph_from_file("grafo.g");
     print_graph(g);
- 
+    BFS(g, 1);
     return 0;
 }

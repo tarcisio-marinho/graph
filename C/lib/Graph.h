@@ -19,12 +19,13 @@ typedef struct AdjList{
 }Adj;
 
 
-
+void BFS(Graph * graph, int vertice);
 Graph* create_graph(int quantityNodes);
 Adj* new_adj_list(int vertex);
 void add_edge(Graph *graph, int startVertex, int endVertex);
 void print_graph(Graph *graph);
 void destroy_graph(Graph *graph);
+void clean_visits(Graph *graph);
 
 Graph * graph_from_file(const char * path);
 Graph * create_graph(int V);

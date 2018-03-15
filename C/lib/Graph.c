@@ -4,6 +4,32 @@
 #include "Graph.h"
 
 
+void BFS(Graph * graph, int vertice){
+    if(graph == NULL)   return;
+
+    int distancia[graph->size];
+    int pai[graph->size];
+    Queue q;
+    create_queue(&q);
+    clean_visits(graph);
+
+    graph->visited[vertice] = true;
+    enqueue(&q, vertice);
+
+    while(!is_empty(q)){
+        int valor = dequeue(&q);
+        printf("%d ", valor);
+
+        for(int i = 0; i < graph->size; i++){
+            if(!graph->visited[i]){
+                graph->visited[i] = true;
+                enqueue(&q, i);
+            }
+        }
+    }
+}
+
+
 void mat_from_file(const char * path){
     FILE * f = fopen(path, "r");
     if(f == NULL){
