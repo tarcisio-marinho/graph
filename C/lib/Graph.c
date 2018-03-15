@@ -50,16 +50,16 @@ Graph * graph_from_file(const char * path){
 
 
 Graph* create_graph(int quantityNodes){
-  Graph *temp = (Graph*) malloc(sizeof(Graph));
-  temp->size = quantityNodes;
-  temp->vertices = (Adj**) malloc(quantityNodes * sizeof(Adj*));
-  temp->visited = (bool*) malloc(quantityNodes * sizeof(bool));
-  int i;
-  for (i = 0; i < quantityNodes; i ++){
-      temp->vertices[i] = NULL;
-      temp->visited[i] = false;
-  }
-  return(temp);
+    Graph *temp = (Graph*) malloc(sizeof(Graph));
+    temp->size = quantityNodes;
+    temp->vertices = (Adj**) malloc(quantityNodes * sizeof(Adj*));
+    temp->visited = (bool*) malloc(quantityNodes * sizeof(bool));
+    int i;
+    for (i = 0; i < quantityNodes; i ++){
+        temp->vertices[i] = NULL;
+        temp->visited[i] = false;
+    }
+    return(temp);
 
 }
 
@@ -73,14 +73,14 @@ Adj* new_adj_list(int vertex){
 
 
 void add_edge(Graph *graph, int startVertex, int endVertex){
-  Adj *vertex = new_adj_list(endVertex);
-  vertex->next = graph->vertices[startVertex];
-  graph->vertices[startVertex] = vertex;
+    Adj *vertex = new_adj_list(endVertex);
+    vertex->next = graph->vertices[startVertex];
+    graph->vertices[startVertex] = vertex;
 
-  //Undirected graph has an Edge to the other direction as well.
-  /*vertex = new_adj_list(startVertex);
-  vertex->next = graph->vertices[endVertex];
-  graph->vertices[endVertex] = vertex;*/
+    //Undirected graph has an Edge to the other direction as well.
+    /*vertex = new_adj_list(startVertex);
+    vertex->next = graph->vertices[endVertex];
+    graph->vertices[endVertex] = vertex;*/
 }
 
 void print_graph(Graph *graph){
@@ -100,28 +100,27 @@ void print_graph(Graph *graph){
 }
 
 void clean_visits(Graph *graph){
-  int i;
-  for (i = 0; i < graph->size; i ++)
-    graph->visited[i] = false;
+    int i;
+    for (i = 0; i < graph->size; i ++)
+        graph->visited[i] = false;
 }
 
 
 
 void destroy_graph(Graph *graph){
-  int i;
-  for (i = 0; i < graph->size; i ++)
-  {
-    Adj *curr = graph->vertices[i];
-    while (curr != NULL)
-    {
-      graph->vertices[i] = graph->vertices[i]->next;
-      free(curr);
-      curr = graph->vertices[i];
+    int i;
+    for (i = 0; i < graph->size; i ++){
+        Adj *curr = graph->vertices[i];
+        while (curr != NULL)
+        {
+        graph->vertices[i] = graph->vertices[i]->next;
+        free(curr);
+        curr = graph->vertices[i];
+        }
+        free(curr);
+        free(graph->vertices[i]);
     }
-    free(curr);
-    free(graph->vertices[i]);
-  }
-  free(graph->vertices);
-  free(graph->visited);
-  free(graph);
+    free(graph->vertices);
+    free(graph->visited);
+    free(graph);
 }

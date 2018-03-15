@@ -8,11 +8,9 @@
 #include<stdlib.h>
 
 typedef struct graph{
-  
     int size;
     struct AdjList **vertices;
     bool *visited;
-
 }Graph;
 
 typedef struct AdjList{
