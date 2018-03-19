@@ -1,7 +1,25 @@
-#include<stdio.h>
-#include<stdlib.h>
 
 #include "Graph.h"
+
+void DFS(Graph * graph, int vertice){
+    clean_visits(graph);
+    sub_dfs(graph, vertice);
+}
+
+
+void sub_dfs(Graph *graph, int vertice){
+    graph->visited[vertice] = true;
+    printf("%d\n", vertice);
+
+    Adj *curr = graph->vertices[vertice];
+
+    while (curr != NULL){
+        if (!graph->visited[curr->item])
+        sub_dfs(graph, curr->item);
+
+        curr = curr->next;
+    }
+}
 
 
 void BFS(Graph * graph, int vertice){
@@ -10,6 +28,7 @@ void BFS(Graph * graph, int vertice){
     int distancia[graph->size];
     int pai[graph->size];
     Queue q;
+
     create_queue(&q);
     clean_visits(graph);
 

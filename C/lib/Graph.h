@@ -18,7 +18,8 @@ typedef struct AdjList{
     struct AdjList *next;
 }Adj;
 
-
+void DFS(Graph * graph, int vertice);
+void sub_dfs(Graph *graph, int vertice);
 void BFS(Graph * graph, int vertice);
 Graph* create_graph(int quantityNodes);
 Adj* new_adj_list(int vertex);
