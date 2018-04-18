@@ -12,6 +12,7 @@ int main(int argc, char *argv[]){
     Graph *g = graph_from_file("grafo.g");
     print_graph(g);
     
-    DFS(g, 1);
+    raio(g);
+
     return 0;
 }

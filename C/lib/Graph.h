@@ -21,6 +21,7 @@ typedef struct AdjList{
 void DFS(Graph * graph, int vertice);
 void sub_dfs(Graph *graph, int vertice);
 void BFS(Graph * graph, int vertice);
+void raio(Graph *);
 Graph* create_graph(int quantityNodes);
 Adj* new_adj_list(int vertex);
 void add_edge(Graph *graph, int startVertex, int endVertex);

@@ -1,25 +1,6 @@
 
 #include "Graph.h"
 
-void DFS(Graph * graph, int vertice){
-    clean_visits(graph);
-    sub_dfs(graph, vertice);
-}
-
-
-void sub_dfs(Graph *graph, int vertice){
-    graph->visited[vertice] = true;
-    printf("%d\n", vertice);
-
-    Adj *curr = graph->vertices[vertice];
-
-    while (curr != NULL){
-        if (!graph->visited[curr->item])
-        sub_dfs(graph, curr->item);
-
-        curr = curr->next;
-    }
-}
 
 
 void BFS(Graph * graph, int vertice){
@@ -48,6 +29,47 @@ void BFS(Graph * graph, int vertice){
     }
 }
 
+void DFS(Graph * graph, int vertice){
+    clean_visits(graph);
+    sub_dfs(graph, vertice);
+}
+
+
+void sub_dfs(Graph *graph, int vertice){
+    graph->visited[vertice] = true;
+    printf("%d\n", vertice);
+
+    for (Adj *curr = graph->vertices[vertice]; curr != NULL; curr = curr->next){
+        if (!graph->visited[curr->item]){
+            sub_dfs(graph, curr->item);  
+        } 
+    }
+}
+
+void raio(Graph * graph){
+    int raio;
+    int vertices = graph->size;
+    int *distancias;
+    int excentricidades[vertices];
+    int maior = 0, menor;
+
+    for(int i = 0; i < vertices; i++){
+        distancias = DFS(graph, i);
+        excentricidades[i] = distancias[vertices-1];
+    }
+
+    menor = excentricidades[0];
+    for (int i = 0; i< vertices; i++){
+        if(excentricidades[i] < menor){
+            menor = excentricidades[i];
+        }
+    }
+    raio = menor;
+    
+
+    printf("Raio: %d\n", raio);
+
+}
 
 void mat_from_file(const char * path){
     FILE * f = fopen(path, "r");
