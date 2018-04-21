@@ -3,11 +3,11 @@
 
 
 
-void BFS(Graph * graph, int vertice){
-    if(graph == NULL)   return;
+int * BFS(Graph * graph, int vertice){
+    if(graph == NULL)   return NULL;
 
-    int distancia[graph->size];
-    int pai[graph->size];
+    int *distancia = NULL;
+    distancia = (int *)malloc(sizeof(int)*graph->size);
     Queue q;
 
     create_queue(&q);
@@ -18,16 +18,19 @@ void BFS(Graph * graph, int vertice){
 
     while(!is_empty(q)){
         int valor = dequeue(&q);
-        printf("%d ", valor);
 
         for(int i = 0; i < graph->size; i++){
             if(!graph->visited[i]){
                 graph->visited[i] = true;
+                distancia[i] = distancia[valor] + 1;
                 enqueue(&q, i);
             }
         }
     }
+
+    return distancia;
 }
+
 
 void DFS(Graph * graph, int vertice){
     clean_visits(graph);
@@ -46,30 +49,6 @@ void sub_dfs(Graph *graph, int vertice){
     }
 }
 
-void raio(Graph * graph){
-    int raio;
-    int vertices = graph->size;
-    int *distancias;
-    int excentricidades[vertices];
-    int maior = 0, menor;
-
-    for(int i = 0; i < vertices; i++){
-        distancias = DFS(graph, i);
-        excentricidades[i] = distancias[vertices-1];
-    }
-
-    menor = excentricidades[0];
-    for (int i = 0; i< vertices; i++){
-        if(excentricidades[i] < menor){
-            menor = excentricidades[i];
-        }
-    }
-    raio = menor;
-    
-
-    printf("Raio: %d\n", raio);
-
-}
 
 void mat_from_file(const char * path){
     FILE * f = fopen(path, "r");
