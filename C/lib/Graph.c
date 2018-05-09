@@ -2,6 +2,60 @@
 #include "Graph.h"
 
 
+Graph * max_flow_from_file(const char * path){
+    FILE * f = fopen(path, "r");
+    if(f == NULL){
+        printf("Arquivo inexistente\n");
+        exit(-1);
+    }
+    
+    int size, s, t, qtd_arestas, aux, aux2, capacidade;
+    fscanf(f, "%d", &s); // origem
+    fscanf(f, "%d", &t); // destino
+    fscanf(f, "%d", &qtd_arestas); // quantidade de arestas
+    
+    Graph * g = create_graph(13); // grafo com 13 vertices
+    while(!feof(f)){
+        fscanf(f, "%d", &aux);
+        fscanf(f, "%d", &aux2); 
+        fscanf(f, "%d", &capacidade); // origem
+
+        add_edge(g, aux, aux2);
+    }
+
+
+    return g;   
+}
+
+
+void ford_fulkerson(Graph *g, int s, int t){
+
+}
+
+void raio(Graph *g){
+    int size = g->size, *distancia = NULL, maior = 0, menor, raio = -1;
+    int excentricidades[size];
+    for(int i =0; i< size; i++){
+        distancia = BFS(g, i);
+        for(int i = 0; i < size; i++){
+            if(distancia[i] > maior){
+                maior = distancia[i];
+            }
+        }
+        excentricidades[i] = maior;
+    }
+
+    menor = excentricidades[0];
+    for(int i = 0; i < size; i++){
+        if(excentricidades[i] < menor){
+            menor = excentricidades[i];
+        }
+    }
+
+    raio = menor;
+    printf("RAIO = %d\n", raio);
+}
+
 
 int * BFS(Graph * graph, int vertice){
     if(graph == NULL)   return NULL;
