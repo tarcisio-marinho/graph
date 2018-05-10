@@ -42,7 +42,10 @@ bool bfs(int rGraph[V][V], int s, int t, int parent[])
  
     // If we reached sink in BFS starting from source, then return
     // true, else false
-    return (visited[t] == true);
+    if(visited[t]){
+        return true;
+    }
+    return false;
 }
  
 // Returns the maximum flow from s to t in the given graph

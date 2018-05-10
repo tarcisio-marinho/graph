@@ -1,6 +1,92 @@
 
 #include "Graph.h"
+#define V 5
 
+bool flow_bfs(Graph *g, int s, int t, int parent[]){
+    // Create a visited array and mark all vertices as not visited
+    bool visited[V];
+    memset(visited, 0, sizeof(visited));
+ 
+    // Create a queue, enqueue source vertex and mark source vertex
+    // as visited
+    Queue *q;
+    create_queue(q);
+    enqueue(q, s);
+
+    g->visited[s] = true;
+    parent[s] = -1;
+ 
+    // Standard BFS Loop
+    while (!is_empty(q)){
+        int u = head(q);
+        dequeue(q);
+ 
+        for (int v=0; v<V; v++){
+            if (visited[v]){
+                enqueue(q, v);
+                parent[v] = u;
+                visited[v] = true;
+            }
+        }
+    }
+ 
+    // If we reached sink in BFS starting from source, then return
+    // true, else false
+    if(visited[t]){
+        return true;
+    }
+    return false;
+}
+ 
+// Returns the maximum flow from s to t in the given graph
+int fordFulkerson(Graph *g, int s, int t){
+    int u, v;
+ 
+    // Create a residual graph and fill the residual graph with
+    // given capacities in the original graph as residual capacities
+    // in residual graph
+    Graph* rGraph = create_graph(g->size); // Residual graph where rGraph[i][j] indicates 
+                     // residual capacity of edge from i to j (if there
+                     // is an edge. If rGraph[i][j] is 0, then there is not)  
+    for (int i = 0; i < rGraph->size; i ++){
+        Adj *curr = g->vertices[i];
+        while (curr != NULL){
+            add_edge(rGraph, i, curr->item, curr->weight);
+            curr = curr->next;
+        } 
+    }
+ 
+    int parent[V];  // This array is filled by BFS and to store path
+ 
+    int max_flow = 0;  // There is no flow initially
+ 
+    // Augment the flow while tere is path from source to sink
+    while (flow_bfs(rGraph, s, t, parent)){
+        // Find minimum residual capacity of the edges along the
+        // path filled by BFS. Or we can say find the maximum flow
+        // through the path found.
+        int path_flow = 9999999;
+        for (v = t; v != s; v = parent[v]){
+            u = parent[v];
+            path_flow = min(path_flow, rGraph[u][v]);
+            path_flow = min(path_flow, rGraph->vertices[v]);
+        }
+ 
+        // update residual capacities of the edges and reverse edges
+        // along the path
+        for (v = t; v != s; v = parent[v]){
+            u = parent[v];
+            rGraph[u][v] -= path_flow;
+            rGraph[v][u] += path_flow;
+        }
+ 
+        // Add path flow to overall flow
+        max_flow += path_flow;
+    }
+ 
+    // Return the overall flow
+    return max_flow;
+}
 
 Graph * max_flow_from_file(const char * path){
     FILE * f = fopen(path, "r");

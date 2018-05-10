@@ -18,7 +18,7 @@ typedef struct AdjList{
     struct AdjList *next;
 }Adj;
 
-
+bool flow_bfs(Graph *g, int s, int t, int parent[]);
 Graph * max_flow_from_file(const char * path);
 void ford_fulkerson(Graph *g, int s, int t);
 void DFS(Graph * graph, int vertice);
