@@ -20,9 +20,8 @@ Graph * max_flow_from_file(const char * path){
         fscanf(f, "%d", &aux2); 
         fscanf(f, "%d", &capacidade); // origem
 
-        add_edge(g, aux, aux2);
+        add_edge(g, aux, aux2, capacidade);
     }
-
 
     return g;   
 }
@@ -164,16 +163,17 @@ Graph* create_graph(int quantityNodes){
 }
 
 
-Adj* new_adj_list(int vertex){
+Adj* new_adj_list(int vertex, int weight){
     Adj *temp = (Adj*) malloc(1 * sizeof(Adj));
     temp->item = vertex;
     temp->next = NULL;
+    temp->weight = weight;
     return(temp);
 }
 
 
-void add_edge(Graph *graph, int startVertex, int endVertex){
-    Adj *vertex = new_adj_list(endVertex);
+void add_edge(Graph *graph, int startVertex, int endVertex, int weight){
+    Adj *vertex = new_adj_list(endVertex, weight);
     vertex->next = graph->vertices[startVertex];
     graph->vertices[startVertex] = vertex;
 

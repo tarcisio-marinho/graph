@@ -14,7 +14,7 @@ typedef struct graph{
 }Graph;
 
 typedef struct AdjList{
-    int item;
+    int item, weight;
     struct AdjList *next;
 }Adj;
 
@@ -26,8 +26,8 @@ void sub_dfs(Graph *graph, int vertice);
 int * BFS(Graph * graph, int vertice);
 void raio(Graph *);
 Graph* create_graph(int quantityNodes);
-Adj* new_adj_list(int vertex);
-void add_edge(Graph *graph, int startVertex, int endVertex);
+Adj* new_adj_list(int vertex, int weight);
+void add_edge(Graph *graph, int startVertex, int endVertex, int weight);
 void print_graph(Graph *graph);
 void destroy_graph(Graph *graph);
 void clean_visits(Graph *graph);
