@@ -140,7 +140,7 @@ Graph * graph_from_file(const char * path){
             int valor;
             fscanf(f, "%d", &valor);
             if(valor == 1){
-                add_edge(g, i, j);
+                add_edge(g, i, j, 0);
             }
         }
     }
@@ -192,7 +192,7 @@ void print_graph(Graph *graph){
         printf("%d ~>", i);
         Adj *curr = graph->vertices[i];
         while (curr != NULL){
-            printf(" %d", curr->item);
+            printf(" %d - Weight: {%d} - ", curr->item, curr->weight);
             curr = curr->next;
         } 
           printf("\n");
