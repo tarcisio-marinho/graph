@@ -10,16 +10,21 @@ if __name__ == "__main__":
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
-    <graph id="G" edgedefault="directed">\n"""
+    <key id="d1" for="edge" attr.name="weight" attr.type="int"/>
+    <graph id="G" edgedefault="undirected">"""
 
     end_file = """  </graph>
 </graphml>"""
 
     new_node = ""
 
-    node_declaration = '    <node id="{}"/>\n'
+    node_declaration = '        <node id="{}"/>\n'
 
-    edge_declaration = '    <edge source="{}" target="{}"/>\n'
+    edge_declaration = '        <edge source="{}" target="{}">\n'
+
+    key_declaration = '            <data key="d1">{}</data>\n'
+
+    edge_end = '        </edge>\n'
 
 
     with open(file1) as f:
@@ -27,7 +32,7 @@ if __name__ == "__main__":
 
     grafo1 = grafo1.split("\n")
     grafo1.remove('1') # start of the algorithm
-    grafo1.remove("13 21") # end of the algorithm and number of arestas
+    grafo1.remove("13 21") # end of the algorithm and number of edges
 
     complete_file = ""
     complete_file +=start_file
@@ -43,7 +48,8 @@ if __name__ == "__main__":
         source = nodes[0]
         destination = nodes[1]
         weight = nodes[2]
-        complete_file += edge_declaration.format(source, destination)
+        complete_file += edge_declaration.format(source, destination) + key_declaration.format(weight) + edge_end
+                        
 
     complete_file += end_file
 
