@@ -7,6 +7,8 @@
 #include<stdbool.h>
 #include<stdlib.h>
 
+#define V 13
+
 typedef struct graph{
     int size;
     struct AdjList **vertices;
@@ -18,9 +20,12 @@ typedef struct AdjList{
     struct AdjList *next;
 }Adj;
 
+int min_cut_bfs(int rGraph[V][V], int s, int t, int parent[]);
+void min_cut_dfs(int rGraph[V][V], int s, bool visited[]);
+void min_cut(const char *path ,int s, int t);
+
 bool flow_bfs(Graph *g, int s, int t, int parent[]);
 Graph * max_flow_from_file(const char * path);
-void ford_fulkerson(Graph *g, int s, int t);
 void DFS(Graph * graph, int vertice);
 void sub_dfs(Graph *graph, int vertice);
 int * BFS(Graph * graph, int vertice);
