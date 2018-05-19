@@ -6,11 +6,8 @@
 
 int main(int argc, char *argv[]){
     
-    int V = 5;
-    
-    Graph *g = max_flow_from_file("grafo2.g");
-    print_graph(g);
-    
+
+    min_cut("grafo2.g");    
 
     return 0;
 }

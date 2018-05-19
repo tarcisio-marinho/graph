@@ -1,38 +1,35 @@
 
 #include "Graph.h"
-#define V 13
+
+int min(int a, int b){
+    return !(b<a)?a:b; 
+}
 
 int min_cut_bfs(int rGraph[V][V], int s, int t, int parent[]){
-    // Create a visited array and mark all vertices as not visited
     bool visited[V];
     memset(visited, 0, sizeof(visited));
  
-    // Create a queue, enqueue source vertex and mark source vertex
-    // as visited
     Queue *q;
     create_queue(&q);
-    enqueue(q, s);
+    enqueue(&q, s);
     visited[s] = true;
     parent[s] = -1;
  
-    // Standard BFS Loop
     while (!is_empty(q)){
         int u = head(q);
-        dequeue(q);
+        dequeue(&q);
  
         for (int v=0; v<V; v++)
         {
             if (visited[v]==false && rGraph[u][v] > 0)
             {
-                enqueue(q, v);
+                enqueue(&q, v);
                 parent[v] = u;
                 visited[v] = true;
             }
         }
     }
  
-    // If we reached sink in BFS starting from source, then return
-    // true, else false
     return (visited[t] == true);
 }
 
@@ -40,53 +37,68 @@ void min_cut_dfs(int rGraph[V][V], int s, bool visited[]){
     visited[s] = true;
     for (int i = 0; i < V; i++)
        if (rGraph[s][i] && !visited[i])
-           dfs(rGraph, i, visited);
+           min_cut_dfs(rGraph, i, visited);
 }
 
-void min_cut(const char *path ,int s, int t){
+void min_cut(const char *path){
     int u, v;
 
+    FILE * f = fopen(path, "r");
+    if(f == NULL){
+        printf("Arquivo inexistente\n");
+        exit(-1);
+    }
+    
+    // Create empty graph
     int graph[V][V];
-    FILE *f = fopen(path, "r");
+    for(int i = 1; i < V; i++){
+        for (int j = 1; j < V; j++){
+            graph[i][j] = 0;
+        }
+    }
+    
+    int s, t, qtd_arestas, aux, aux2, capacidade;
+    fscanf(f, "%d", &s); // origem
+    fscanf(f, "%d", &t); // destino
+    fscanf(f, "%d", &qtd_arestas); // quantidade de arestas
+    
+    // populate graph
+    while(!feof(f)){
+        fscanf(f, "%d", &aux); // v1
+        fscanf(f, "%d", &aux2); // v2
+        fscanf(f, "%d", &capacidade); // origem
 
- 
-    // Create a residual graph and fill the residual graph with
-    // given capacities in the original graph as residual capacities
-    // in residual graph
-    int rGraph[V][V]; // rGraph[i][j] indicates residual capacity of edge i-j
+        graph[aux][aux2] = capacidade;
+    }
+
+
+    // ṕopulate grafo residual
+    int residual[V][V]; 
     for (u = 0; u < V; u++)
         for (v = 0; v < V; v++)
-             rGraph[u][v] = graph[u][v];
+             residual[u][v] = graph[u][v];
  
-    int parent[V];  // This array is filled by BFS and to store path
+    int parent[V];  
  
-    // Augment the flow while tere is path from source to sink
-    while (min_cut_bfs(rGraph, s, t, parent)){
-        // Find minimum residual capacity of the edhes along the
-        // path filled by BFS. Or we can say find the maximum flow
-        // through the path found.
+   
+    while (min_cut_bfs(residual, s, t, parent)){
         int path_flow = 999999999;
         for (v=t; v!=s; v=parent[v]){
             u = parent[v];
-            path_flow = min(path_flow, rGraph[u][v]);
+            path_flow = min(path_flow, residual[u][v]);
         }
  
-        // update residual capacities of the edges and reverse edges
-        // along the path
         for (v=t; v != s; v=parent[v]){
             u = parent[v];
-            rGraph[u][v] -= path_flow;
-            rGraph[v][u] += path_flow;
+            residual[u][v] -= path_flow;
+            residual[v][u] += path_flow;
         }
     }
  
-    // Flow is maximum now, find vertices reachable from s
     bool visited[V];
     memset(visited, false, sizeof(visited));
-    min_cut_dfs(rGraph, s, visited);
+    min_cut_dfs(residual, s, visited);
     
-    // Print all edges that are from a reachable vertex to
-    // non-reachable vertex in the original graph
     for (int i = 0; i < V; i++){
         for (int j = 0; j < V; j++){
             if (visited[i] && !visited[j] && graph[i][j]){

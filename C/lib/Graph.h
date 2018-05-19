@@ -6,8 +6,9 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
+#include <string.h>
 
-#define V 13
+#define V 14
 
 typedef struct graph{
     int size;
@@ -22,8 +23,8 @@ typedef struct AdjList{
 
 int min_cut_bfs(int rGraph[V][V], int s, int t, int parent[]);
 void min_cut_dfs(int rGraph[V][V], int s, bool visited[]);
-void min_cut(const char *path ,int s, int t);
-
+void min_cut(const char *path);
+int min(int a, int b);
 bool flow_bfs(Graph *g, int s, int t, int parent[]);
 Graph * max_flow_from_file(const char * path);
 void DFS(Graph * graph, int vertice);
@@ -38,7 +39,7 @@ void destroy_graph(Graph *graph);
 void clean_visits(Graph *graph);
 
 Graph * graph_from_file(const char * path);
-Graph * create_graph(int V);
+Graph * create_graph(int quantityNodes);
 void mat_from_file(const char * path);
 
 
