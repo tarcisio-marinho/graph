@@ -70,9 +70,10 @@ void min_cut(const char *path){
 
         graph[aux][aux2] = capacidade;
     }
-
+    print_matrix(graph);
 
     // ṕopulate grafo residual
+    int max_flow = 0;
     int residual[V][V]; 
     for (u = 0; u < V; u++)
         for (v = 0; v < V; v++)
@@ -93,12 +94,16 @@ void min_cut(const char *path){
             residual[u][v] -= path_flow;
             residual[v][u] += path_flow;
         }
+        max_flow += path_flow;
     }
+
+    printf("Fluxo máximo: %d\n\n", max_flow);
  
     bool visited[V];
     memset(visited, false, sizeof(visited));
     min_cut_dfs(residual, s, visited);
     
+    printf("Corte mínimo:\n");
     for (int i = 0; i < V; i++){
         for (int j = 0; j < V; j++){
             if (visited[i] && !visited[j] && graph[i][j]){
@@ -328,4 +333,19 @@ void destroy_graph(Graph *graph){
     free(graph->vertices);
     free(graph->visited);
     free(graph);
+}
+
+
+void print_matrix(int mat[][V]){
+    printf("Graph (%d nodes):\n", V);
+
+    for (int i = 1; i < V; i++){
+        printf("%d ~>", i);
+        for (int j = 1; j < V; j++){
+            if(mat[i][j] > 0){
+                printf(" %d - weight {%d} - " , j, mat[i][j]);
+            }
+        }
+        printf("\n");
+    }
 }

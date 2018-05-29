@@ -35,6 +35,7 @@ Graph* create_graph(int quantityNodes);
 Adj* new_adj_list(int vertex, int weight);
 void add_edge(Graph *graph, int startVertex, int endVertex, int weight);
 void print_graph(Graph *graph);
+void print_matrix(int mat[][V]);
 void destroy_graph(Graph *graph);
 void clean_visits(Graph *graph);
 
