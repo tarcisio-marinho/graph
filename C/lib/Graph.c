@@ -9,7 +9,7 @@ int min_cut_bfs(int rGraph[V][V], int s, int t, int parent[]){
     bool visited[V];
     memset(visited, 0, sizeof(visited));
  
-    Queue *q;
+    Queue q;
     create_queue(&q);
     enqueue(&q, s);
     visited[s] = true;
