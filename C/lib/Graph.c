@@ -343,7 +343,7 @@ void print_matrix(int mat[][V]){
         printf("%d ~>", i);
         for (int j = 1; j < V; j++){
             if(mat[i][j] > 0){
-                printf(" %d - weight {%d} - " , j, mat[i][j]);
+                printf(" %d - capacidade {%d} - " , j, mat[i][j]);
             }
         }
         printf("\n");
